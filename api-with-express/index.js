@@ -1,4 +1,6 @@
 const Joi = require('joi');
+const logger = require('./logger');
+const authenticate  = require('./authenticate');
 const express = require('express');
 const app = express();
 
@@ -9,6 +11,10 @@ const courses = [
     { id: 3, name: 'course3' },
     { id: 4, name: 'course4' },
 ];
+
+//middleware
+app.use(logger);
+app.use(authenticate);
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
