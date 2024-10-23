@@ -1,3 +1,5 @@
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const logger = require('./logger');
 const authenticate  = require('./authenticate');
@@ -5,6 +7,13 @@ const express = require('express');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true})); //built in middleware
+app.use(express.static('public')); //to  store static files
+//third-party middlewares
+app.use(helmet());
+app.use(morgan('tiny'));
+
+
 const courses = [
     { id: 1, name: 'course1' },
     { id: 2, name: 'course2' },
