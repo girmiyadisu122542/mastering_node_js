@@ -1,3 +1,4 @@
+const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const Joi = require('joi');
@@ -6,13 +7,22 @@ const authenticate  = require('./authenticate');
 const express = require('express');
 const app = express();
 
+//Configuraiton
+console.log("Application Name: " + config.get('name'));
+console.log("Mail Server: " + config.get('mail.host'));
+// console.log("Mail Password: " + config.get('mail.password'));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); //built in middleware
 app.use(express.static('public')); //to  store static files
-//third-party middlewares
 app.use(helmet());
-app.use(morgan('tiny'));
 
+console.log(app.get('env'));
+
+if (app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    console.log('Morgan Enabled...');
+  }
 
 const courses = [
     { id: 1, name: 'course1' },
