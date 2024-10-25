@@ -20,13 +20,6 @@ function getRepositories(user) {
     getRepositories(user.name, getCommits);
 
 }
-function getCommits(repos) {
-    console.log('Repos: ', repos);
-    getCommits(repos, displayCommits)
-}
-function displayCommits(commits) {
-    console.log(commits);
-}
 
 //Using callback
 
@@ -44,9 +37,3 @@ function getRepositories(username, callback) {
     }, 2000);
 }
 
-function getCommits(repo, callback) {
-    setTimeout(() => {
-        console.log(`${repo} Commits:`);
-        callback(['commit1', 'commit2', 'Commit3']);
-    }, 2000)
-}
