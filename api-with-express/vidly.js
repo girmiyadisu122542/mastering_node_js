@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const mongoose = require('mongoose');
 const express = require('express')
 const genres = require('./routes/genres');
 const app = express();
@@ -6,7 +7,9 @@ const app = express();
 app.use(express.json());
 app.use('/api/genres', genres);
 
-
+mongoose.connect('mongodb://localhost/project')
+        .then(() => console.log('Connected to MongoDb...'))
+        .catch(err => console.log('Could not connect to the db'));
 //landing page
 app.get('/', (req, res) => res.send(`<h1 style='text-align:center;'>Landing Page</h1 style=>`));
 
