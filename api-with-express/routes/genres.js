@@ -9,17 +9,18 @@ const asyncMiddleware = require('../middleware/async');
 // list of genres
 
  
-router.get('/', auth, asyncMiddleware(async (req, res, next) => {
-        const genres = await Genre.find().sort({name: 1});
+router.get('/', auth, async (req, res, next) => {
+       throw new Error('Couldnot found the genre');
+    const genres = await Genre.find().sort({name: 1});
         res.send(genres);
-   }));
+   });
 
 //get single genre
-router.get('/:id', auth, asyncMiddleware(async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
     const genre = await Genre.find({_id: req.params.id});
     if (!genre) return res.status(404).send('Genre Not Found!');
     res.send(genre);
-}));
+});
 //create genere
 router.post('', auth, auth, asyncMiddleware(async (req, res) => {
 
