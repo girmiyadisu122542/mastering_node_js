@@ -10,7 +10,7 @@ const asyncMiddleware = require('../middleware/async');
 
  
 router.get('/', auth, async (req, res, next) => {
-       throw new Error('Couldnot found the genre');
+    //    throw new Error('Couldnot found the genre');
     const genres = await Genre.find().sort({name: 1});
         res.send(genres);
    });
