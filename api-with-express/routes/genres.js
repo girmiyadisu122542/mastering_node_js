@@ -1,3 +1,4 @@
+const validateObjectId = require('../middleware/validateObjectId')
 const auth = require('../middleware/auth');
 const admin =require('../middleware/admin');
 const { Genre, validate } = require('../models/genres');
@@ -9,20 +10,20 @@ const asyncMiddleware = require('../middleware/async');
 // list of genres
 
  
-router.get('/', auth, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     //    throw new Error('Couldnot found the genre');
     const genres = await Genre.find().sort({name: 1});
         res.send(genres);
    });
 
 //get single genre
-router.get('/:id', auth, async (req, res) => {
-    const genre = await Genre.find({_id: req.params.id});
+router.get('/:id', validateObjectId, async (req, res) => {
+    const genre = await Genre.findById(req.params.id);
     if (!genre) return res.status(404).send('Genre Not Found!');
     res.send(genre);
 });
 //create genere
-router.post('', auth, auth, asyncMiddleware(async (req, res) => {
+router.post('', auth, asyncMiddleware(async (req, res) => {
 
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);

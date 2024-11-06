@@ -1,6 +1,6 @@
 const winston = require('winston')
 const mongoose = require('mongoose');
-
+const config = require('config');
 // const logger = winston.createLogger({
 //     level: 'info',
 //     format: winston.format.simple(),
@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 // });
 
 module.exports = function() {
-mongoose.connect('mongodb://localhost/project')
-.then(() => console.log('Connected to MongoDb...'))
+const db = config.get('db');
+mongoose.connect(db)
+.then(() => console.log(`Connected to ${db}...`))
 }
