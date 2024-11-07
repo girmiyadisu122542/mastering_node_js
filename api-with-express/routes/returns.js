@@ -4,7 +4,6 @@ const validate = require('../middleware/validate');
 const auth = require('../middleware/auth');
 const { Rental } = require('../models/rental');
 const router = express.Router();
-const moment = require('moment');
 const { Movie } = require('../models/movies');
 
 

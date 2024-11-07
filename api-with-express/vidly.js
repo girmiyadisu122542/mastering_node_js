@@ -5,7 +5,7 @@ require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();
 require('./startup/validation')();
-
+require('./startup/prod')(app);
 
 //landing page
 app.get('/', (req, res) => res.send(`<h1 style='text-align:center;'>Landing Page</h1 style=>`));
