@@ -1,0 +1,15 @@
+{
+  "name": "1-node-farm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Girmay Addisu",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "stringfy": "^0.0.12"
+  }
+}
