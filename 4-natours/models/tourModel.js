@@ -4,9 +4,11 @@ const slugify = require('slugify');
 const tourSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, 'The name of the tour is required'],
     trim: true,
-    unique: [true, 'The name of the tour is required']
+    unique: true,
+    maxlength: [40, 'The name of the tour should be at most 40 characters'],
+    minlength: [10, 'The name of the tour should be at least 10 characters'],
   },
   slug: String,
   secrteTour: {
@@ -15,7 +17,7 @@ const tourSchema = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    required: [true, 'A tour mus have duration']
+    required: [true, 'A tour must have duration']
   },
   maxGroupSize: {
     type: Number,
@@ -23,7 +25,11 @@ const tourSchema = new mongoose.Schema({
   },
   difficulty: {
     type: String,
-    required: [true, 'A tour mus have difficulty']
+    required: [true, 'A tour mus have difficulty'],
+    enum: {
+      values: ['easy', 'medium', 'difficult'],
+      message: 'The difficulty should be either: easy, medium or difficult'
+    }
   },
   ratings: {
     type: Number,
@@ -31,11 +37,14 @@ const tourSchema = new mongoose.Schema({
   },
   ratingsAverage: {
     type: Number,
-    default: 4.5
+    default: 4.5,
+    min: [1, 'The ratings averge must be at least 1'],
+    max: [5, 'The ratings averge must be at most 5']
+
   },
   ratingsQuantity: {
     type: Number,
-    default: 0
+    default: 0,
   },
   summary: {
     type: String,
