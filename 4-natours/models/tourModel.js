@@ -56,6 +56,13 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A price of the tour is required']
   },
   priceDiscount: Number,
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+tourSchema.virtual('durationWeeks').get(function () {
+  return this.duration / 7;
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
