@@ -44,4 +44,4 @@ Basic knowledge of JavaScript is recommended.
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/nodejs-complete-tutorial.git
+   git clone https://github.com/girmiyadisu122542/mastering_node_js.git
